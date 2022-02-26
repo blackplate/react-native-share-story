@@ -14,7 +14,7 @@ const ShareStory = NativeModules.ShareStory
         get() {
           throw new Error(LINKING_ERROR);
         },
-      }
+      },
     );
 
 export function multiply(a: number, b: number): Promise<number> {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-share-story';
+import {StyleSheet, View, Text} from 'react-native';
+import {multiply} from 'react-native-share-story';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
