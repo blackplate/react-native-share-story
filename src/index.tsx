@@ -17,6 +17,10 @@ const ShareStory = NativeModules.ShareStory
       },
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return ShareStory.multiply(a, b);
+export function isInstagramAvailable(): Promise<boolean> {
+  return ShareStory.isInstagramAvailable();
+}
+
+export function shareInstagramStory({}: {}): Promise<boolean> {
+  return ShareStory.shareInstagramStory({});
 }

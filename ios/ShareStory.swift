@@ -1,8 +1,18 @@
 @objc(ShareStory)
 class ShareStory: NSObject {
+    let instagramScheme = URL(string: "instagram-stories://share")
 
-    @objc(multiply:withB:withResolver:withRejecter:)
-    func multiply(a: Float, b: Float, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
-        resolve(a*b)
+    @objc
+    func isInstagramAvailable(_ resolve: RCTPromiseResolveBlock,
+                              rejecter reject: RCTPromiseRejectBlock) -> Void {
+        resolve(UIApplication.shared.canOpenURL(instagramScheme!))
+    }
+
+    @objc
+    func shareInstagramStory(_ config: NSDictionary,
+               resolver resolve: RCTPromiseResolveBlock,
+               rejecter reject: RCTPromiseRejectBlock) -> Void {
+        resolve(true)
     }
 }
+

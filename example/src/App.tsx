@@ -1,18 +1,47 @@
 import * as React from 'react';
 
-import {StyleSheet, View, Text} from 'react-native';
-import {multiply} from 'react-native-share-story';
+import {StyleSheet, View, Text, Button} from 'react-native';
+import {
+  isInstagramAvailable,
+  shareInstagramStory,
+} from 'react-native-share-story';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [result, setResult] = React.useState<boolean>();
+  const [hasShared, setHasShared] = React.useState<boolean>();
+
+  const checkInstagram = React.useCallback(async () => {
+    try {
+      const instagram = await isInstagramAvailable();
+      setResult(instagram);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const share = React.useCallback(async () => {
+    try {
+      const shareSuccess = await shareInstagramStory({});
+      setHasShared(shareSuccess);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+    checkInstagram();
+  }, [checkInstagram]);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>Instagram: {result?.toString()}</Text>
+      <Text>has Shared: {hasShared?.toString()}</Text>
+      <Button
+        title="Share to instagram"
+        onPress={() => {
+          share();
+        }}
+      />
     </View>
   );
 }
@@ -22,10 +51,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
   },
 });

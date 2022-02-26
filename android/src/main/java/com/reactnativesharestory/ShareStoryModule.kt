@@ -1,24 +1,40 @@
 package com.reactnativesharestory
 
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.bridge.Promise
+import android.content.pm.PackageManager
+import com.facebook.react.bridge.*
 
-class ShareStoryModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+class ShareStoryModule(reactContext: ReactApplicationContext) :
+  ReactContextBaseJavaModule(reactContext) {
 
-    override fun getName(): String {
-        return "ShareStory"
+  private val instagramScheme = "com.instagram.android"
+
+  override fun getName(): String {
+    return "ShareStory"
+  }
+
+  private fun canOpenUrl(packageScheme: String, promise: Promise) {
+    try {
+      val activity = currentActivity
+      activity?.packageManager?.getPackageInfo(packageScheme, PackageManager.GET_ACTIVITIES)
+      promise.resolve(true)
+    } catch (e: PackageManager.NameNotFoundException) {
+      promise.resolve(false)
+    } catch (e: Exception) {
+      promise.reject(
+        JSApplicationIllegalArgumentException(
+          "Could not check if URL '" + packageScheme + "' can be opened: " + e.message
+        )
+      )
     }
+  }
 
-    // Example method
-    // See https://reactnative.dev/docs/native-modules-android
-    @ReactMethod
-    fun multiply(a: Int, b: Int, promise: Promise) {
-    
-      promise.resolve(a * b)
-    
-    }
+  @ReactMethod
+  fun isInstagramAvailable(promise: Promise) {
+    canOpenUrl(instagramScheme, promise)
+  }
 
-    
+  @ReactMethod
+  fun shareInstagramStory(config: ReadableMap, promise: Promise) {
+    promise.resolve(true)
+  }
 }
