@@ -28,21 +28,22 @@
     "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
-    "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods"
+    "pods": "cd example && cd ios && bundle exec pod install",
+    "bundler": "bundle install",
+    "bootstrap": "yarn bundler && yarn example && yarn && yarn pods"
   },
   "keywords": [
     "react-native",
     "ios",
     "android"
   ],
-  "repository": "https://github.com/dawidvdh/react-native-share-story",
-  "author": "Dawid van der Hoven <hello@dawid.codes> (https://github.com/dawidvdh)",
+  "repository": "https://github.com/blackplate/react-native-share-story",
+  "author": "Dawid van der Hoven",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dawidvdh/react-native-share-story/issues"
+    "url": "https://github.com/blackplate/react-native-share-story/issues"
   },
-  "homepage": "https://github.com/dawidvdh/react-native-share-story#readme",
+  "homepage": "https://github.com/blackplate/react-native-share-story#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -70,65 +71,6 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
-  },
-  "jest": {
-    "preset": "react-native",
-    "modulePathIgnorePatterns": [
-      "<rootDir>/example/node_modules",
-      "<rootDir>/lib/"
-    ]
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release ${version}",
-      "tagName": "v${version}"
-    },
-    "npm": {
-      "publish": true
-    },
-    "github": {
-      "release": true
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular"
-      }
-    }
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "@react-native-community",
-      "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "quoteProps": "consistent",
-          "singleQuote": true,
-          "tabWidth": 2,
-          "trailingComma": "es5",
-          "useTabs": false
-        }
-      ]
-    }
-  },
-  "eslintIgnore": [
-    "node_modules/",
-    "lib/"
-  ],
-  "prettier": {
-    "quoteProps": "consistent",
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "es5",
-    "useTabs": false
   },
   "react-native-builder-bob": {
     "source": "src",
