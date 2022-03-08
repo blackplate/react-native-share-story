@@ -96,3 +96,27 @@ class ShareStoryModule(reactContext: ReactApplicationContext) :
     }
   }
 }
+
+//  fun shareImageFromURI(url: String?) {
+//    try {
+//    Picasso.get().load(url).into(object : Target {
+//      override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+//        val intent = Intent("com.instagram.share.ADD_TO_STORY")
+//        intent.setDataAndType(getBitmapFromView(bitmap), MEDIA_TYPE_IMAGE);
+//        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//
+//        if (currentActivity?.getPackageManager()?.resolveActivity(intent, 0) != null) {
+//          currentActivity!!.startActivityForResult(intent, 0)
+//        } else {
+//          throw java.lang.Exception("Couldn't open intent")
+//        }
+//      }
+//      override fun onPrepareLoad(placeHolderDrawable: Drawable?) { }
+//      override fun onBitmapFailed(e: java.lang.Exception?, errorDrawable: Drawable?) {
+//        throw java.lang.Exception("Couldn't open image")
+//      }
+//    })
+//    }catch (ex: IOException) {
+//      ex.printStackTrace();
+//    }
+//  }
