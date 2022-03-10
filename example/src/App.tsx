@@ -21,7 +21,10 @@ export default function App() {
 
   const share = React.useCallback(async () => {
     try {
-      const shareSuccess = await shareInstagramStory({});
+      const shareSuccess = await shareInstagramStory({
+        imageUrl:
+          'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+      });
       setHasShared(shareSuccess);
     } catch (error) {
       console.log(error);
