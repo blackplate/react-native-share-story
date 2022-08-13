@@ -1,4 +1,4 @@
-package com.example;
+package com.example.reactnativesharestory;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
