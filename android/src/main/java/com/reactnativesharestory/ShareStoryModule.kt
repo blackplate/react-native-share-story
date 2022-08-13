@@ -1,17 +1,18 @@
 package com.reactnativesharestory
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.provider.MediaStore
 import androidx.core.content.FileProvider
 import com.facebook.react.bridge.*
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.io.InputStream
-import java.net.HttpURLConnection
 import java.net.URL
 
 
@@ -43,7 +44,7 @@ class ShareStoryModule(reactContext: ReactApplicationContext) :
   }
 
   fun getBitmapFromView(bmp: Bitmap?): Uri? {
-    var bmpUri: Uri? = null
+    var bmpUri: Uri?
     try {
       val providerName = this.reactApplicationContext.packageName + ".fileprovider"
       val file = File(currentActivity?.externalCacheDir, System.currentTimeMillis().toString() + ".jpg")
@@ -58,17 +59,12 @@ class ShareStoryModule(reactContext: ReactApplicationContext) :
     return bmpUri
   }
 
-  fun getBitmapFromURL(src: String?): Bitmap? {
-    return try {
+  fun getBitmapFromURL (src: String?): Bitmap? {
+    try {
       val url = URL(src)
-      val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
-      connection.setDoInput(true)
-      connection.connect()
-      val input: InputStream = connection.getInputStream()
-      BitmapFactory.decodeStream(input)
+      return BitmapFactory.decodeStream(url.openConnection().getInputStream())
     } catch (e: IOException) {
-      // Log exception
-      e.printStackTrace();
+      println(e)
       return null
     }
   }
