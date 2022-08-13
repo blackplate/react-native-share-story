@@ -1,5 +1,5 @@
 {
-  "name": "react-native-share-story",
+  "name": "@blackplate/react-native-share-story",
   "version": "0.1.0",
   "description": "Share to an Instagram Story",
   "main": "lib/commonjs/index",

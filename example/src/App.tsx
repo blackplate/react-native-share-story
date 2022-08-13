@@ -4,7 +4,7 @@ import {StyleSheet, View, Text, Button} from 'react-native';
 import {
   isInstagramAvailable,
   shareInstagramStory,
-} from 'react-native-share-story';
+} from '@blackplate/react-native-share-story';
 
 export default function App() {
   const [result, setResult] = React.useState<boolean>();
