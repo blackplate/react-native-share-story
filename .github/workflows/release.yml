@@ -14,10 +14,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.node-version'
-      - run: npm install
-      - run: npm run test:ci
-      - run: npm run prepare
-      - run: npm run release
+          cache: 'npm'
+      - run: yarn install --immutable
+      - run: yarn test:ci
+      - run: yarn prepare
+      - run: yarn release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
