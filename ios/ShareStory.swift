@@ -14,11 +14,13 @@ class ShareStory: NSObject {
                rejecter reject: RCTPromiseRejectBlock) -> Void {
         if(UIApplication.shared.canOpenURL(instagramScheme!) && config["imageUrl"] != nil){
             let url = URL(string: config["imageUrl"] as! String)
+            let attributionLink: String = config["attributionLink"] ?? ""
             var pasteboardItems: Dictionary<String, Any> = [:]
 
             let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
             DispatchQueue.main.async {
                 pasteboardItems["com.instagram.sharedSticker.backgroundImage"] = data!
+                pasteboardItems["com.instagram.sharedSticker.contentURL"] = attributionLink
                 UIPasteboard.general.items = [pasteboardItems]
                 UIApplication.shared.openURL(self.instagramScheme!)
             }

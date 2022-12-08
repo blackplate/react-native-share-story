@@ -23,8 +23,10 @@ export function isInstagramAvailable(): Promise<boolean> {
 
 export function shareInstagramStory({
   imageUrl,
+  attributionLink,
 }: {
   imageUrl: string;
+  attributionLink: string;
 }): Promise<boolean> {
-  return ShareStory.shareInstagramStory({imageUrl});
+  return ShareStory.shareInstagramStory({imageUrl, attributionLink});
 }
