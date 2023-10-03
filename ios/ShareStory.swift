@@ -18,7 +18,6 @@ class ShareStory: NSObject {
             let instagramShareScheme = URL(string: "instagram-stories://share?source_application=\(appID)")
 
             let url = URL(string: config["imageUrl"] as! String)
-            let appId = URL(string: config["appId"] as! String)
             var pasteboardItems: Dictionary<String, Any> = [:]
 
             let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
