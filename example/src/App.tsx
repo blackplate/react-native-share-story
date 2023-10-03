@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text, Button } from 'react-native';
+import {StyleSheet, View, Text, Button} from 'react-native';
 import {
   isInstagramAvailable,
   shareInstagramStory,
@@ -24,7 +24,7 @@ export default function App() {
       const shareSuccess = await shareInstagramStory({
         imageUrl:
           'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
-        appId: '1469389527188223'
+        appId: '1469389527188223',
       });
       setHasShared(shareSuccess);
     } catch (error) {
