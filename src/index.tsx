@@ -23,8 +23,10 @@ export function isInstagramAvailable(): Promise<boolean> {
 
 export function shareInstagramStory({
   imageUrl,
+  appId,
 }: {
   imageUrl: string;
+  appId: string;
 }): Promise<boolean> {
-  return ShareStory.shareInstagramStory({imageUrl});
+  return ShareStory.shareInstagramStory({imageUrl, appId});
 }

@@ -1,6 +1,6 @@
 @objc(ShareStory)
 class ShareStory: NSObject {
-    let instagramScheme = URL(string: "instagram-stories://share")
+    let instagramScheme = URL(string: "instagram-stories://share?source_application")
 
     @objc
     func isInstagramAvailable(_ resolve: RCTPromiseResolveBlock,
@@ -12,7 +12,11 @@ class ShareStory: NSObject {
     func shareInstagramStory(_ config: NSDictionary,
                resolver resolve: RCTPromiseResolveBlock,
                rejecter reject: RCTPromiseRejectBlock) -> Void {
-        if(UIApplication.shared.canOpenURL(instagramScheme!) && config["imageUrl"] != nil){
+        if(UIApplication.shared.canOpenURL(instagramScheme!) && config["imageUrl"] != nil && config["appId"] != nil){
+
+            let appID = config["appId"]
+            let instagramShareScheme = URL(string: "instagram-stories://share?source_application=\(appID)")
+
             let url = URL(string: config["imageUrl"] as! String)
             var pasteboardItems: Dictionary<String, Any> = [:]
 
@@ -20,7 +24,7 @@ class ShareStory: NSObject {
             DispatchQueue.main.async {
                 pasteboardItems["com.instagram.sharedSticker.backgroundImage"] = data!
                 UIPasteboard.general.items = [pasteboardItems]
-                UIApplication.shared.openURL(self.instagramScheme!)
+                UIApplication.shared.openURL(instagramShareScheme!)
             }
 
             resolve(true)

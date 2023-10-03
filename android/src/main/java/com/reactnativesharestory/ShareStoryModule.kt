@@ -80,10 +80,17 @@ class ShareStoryModule(reactContext: ReactApplicationContext) :
       val intent = Intent("com.instagram.share.ADD_TO_STORY")
       val imageUrl =
         if (config.hasKey("imageUrl")) config.getString("imageUrl") else null
+      val appId =
+        if (config.hasKey("appId")) config.getString("appId") else null
 
       if(imageUrl == null) {
         throw Exception("RNShareStory: No url provided");
       }
+
+      if(appId == null) {
+        throw Exception("RNShareStory: No appId provided");
+      }
+
 
       val bitmap = getBitmapFromURL(imageUrl)
 
@@ -97,6 +104,7 @@ class ShareStoryModule(reactContext: ReactApplicationContext) :
         throw Exception("Could not get bitmap URI");
       }
 
+      intent.putExtra("source_application", appId);
       intent.setDataAndType(image, MEDIA_TYPE_IMAGE);
       intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
